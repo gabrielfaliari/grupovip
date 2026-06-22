@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo VIP 🔥</title>
+    <!-- Inclui o script oficial do Telegram Web Apps -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Inclui a biblioteca de efeitos (Canvas Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c1c1e; /* Fundo escuro padrão do Telegram */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Estilização do Botão GRUPO VIP */
+        .fire-button {
+            padding: 22px 45px;
+            font-size: 26px;
+            font-weight: 900; /* Texto bem destacado */
+            color: #ffffff;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b); /* Degradê de fogo */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 75, 43, 0.5);
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            letter-spacing: 1px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Efeito visual de clique */
+        .fire-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 12px rgba(255, 75, 43, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botão personalizado -->
+    <button class="fire-button" id="btnFogo">🔥 GRUPO VIP 🔥</button>
+
+    <script>
+        // Inicializa o Web App do Telegram
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Abre em tela cheia no celular
+
+        const botao = document.getElementById('btnFogo');
+
+        // Seu link de chat privado configurado aqui:
+        const LINK_DO_GRUPO_VIP = "https://t.me/c/4381188254/241";
+
+        botao.addEventListener('click', () => {
+            // 1. Vibração no celular do usuário
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('heavy');
+            }
+
+            // 2. Dispara o efeito das chamas subindo pelas laterais
+            let duracao = 1.2 * 1000; 
+            let fim = Date.now() + duracao;
+
+            (function frame() {
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 60,
+                    origin: { x: 0, y: 1 }, // Canto esquerdo inferior
+                    colors: ['#ff4b2b', '#ff416c', '#ffb03a', '#fff600']
+                });
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 60,
+                    origin: { x: 1, y: 1 }, // Canto direito inferior
+                    colors: ['#ff4b2b', '#ff416c', '#ffb03a', '#fff600']
+                });
+
+                if (Date.now() < fim) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            // 3. Redireciona para o link VIP e fecha a tela do efeito
+            setTimeout(() => {
+                // Abre o link do chat privado nativamente no Telegram
+                tg.openTelegramLink(LINK_DO_GRUPO_VIP);
+                
+                // Fecha o mini app
+                tg.close(); 
+            }, 1300); // Aguarda o efeito terminar antes de redirecionar
+        });
+    </script>
+</body>
+</html>

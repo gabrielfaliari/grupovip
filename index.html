@@ -58,8 +58,8 @@
 
         const botao = document.getElementById('btnFogo');
 
-        // Seu link de chat privado configurado aqui:
-        const LINK_DO_GRUPO_VIP = "https://t.me/c/4381188254/241";
+        // Seu link configurado aqui:
+        const LINK_DO_GRUPO_VIP = "https://t.me/VIPSaraMary_bot";
 
         botao.addEventListener('click', () => {
             // 1. Vibração no celular do usuário
@@ -94,7 +94,7 @@
 
             // 3. Redireciona para o link VIP e fecha a tela do efeito
             setTimeout(() => {
-                // Abre o link do chat privado nativamente no Telegram
+                // Abre o link do robô/grupo nativamente no Telegram
                 tg.openTelegramLink(LINK_DO_GRUPO_VIP);
                 
                 // Fecha o mini app
